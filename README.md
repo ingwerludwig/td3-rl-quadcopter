@@ -34,7 +34,7 @@ Follow these steps to set up and run the training:
 3. **Run the Training**:
    Start the RL training with LQR by executing the main script:
    ```bash
-   python main.py
+   bash ./scripts/run_training.sh
    ```
    This command initiates the training process, which will handle all necessary computations, including environment setup, agent training, and LQR optimization.
 
