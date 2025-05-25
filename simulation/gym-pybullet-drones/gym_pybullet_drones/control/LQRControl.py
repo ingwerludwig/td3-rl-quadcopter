@@ -132,6 +132,9 @@ class QuadcopterLQREnv(gym.Env):
 
         return self.states, reward, terminated, truncated, info
 
+    def set_ref_states(self, ref_states):
+        self.ref_states = ref_states
+
     def _apply_dynamics(self):
         """Update states using RK4 integration for better accuracy."""
         def dynamics(states, actions):

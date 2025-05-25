@@ -1,6 +1,7 @@
 import time
 import argparse
 import numpy as np
+import torch
 
 from gym_pybullet_drones.utils.enums import DroneModel, Physics
 from gym_pybullet_drones.envs.CtrlAviary import CtrlAviary
@@ -8,6 +9,7 @@ from gym_pybullet_drones.control.DSLPIDControl import DSLPIDControl
 from gym_pybullet_drones.utils.Logger import Logger
 from gym_pybullet_drones.utils.utils import sync, str2bool
 from gym_pybullet_drones.control.LQRControl import *
+from src.agents.td3 import TD3
 
 # ---------- DEFAULTS ----------
 DEFAULT_DRONE = DroneModel('cf2x')
@@ -46,8 +48,22 @@ def run(
         obstacles=False
     )
 
+    #### Initiate: Quadcopter Config and ENV #####################
     quad_config = QuadcopterConfig()
     lqr_env = QuadcopterLQREnv(quad_config=quad_config)
+
+    #### Load: checkpoint model#####################
+    state_dim = env.observation_space.shape[0]
+    action_dim = env.action_space.shape[0]
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    agent = TD3(state_dim, action_dim, device)
+
+    #### Initiate: Reference state for simulation #####################
+
+    ###
+    #### Set Ref state in env #####################
+    # lqr_env.set_ref_states()
+    ###
 
     #### Trajectory: smooth vertical climb #####################
     NUM_WP = control_freq_hz * duration_sec
@@ -69,28 +85,28 @@ def run(
     obs = env.reset()
     start_time = time.time()
 
+    ####
+    action_store = []
+
     for i in range(0, int(duration_sec * control_freq_hz)):
 
         #### Step the simulation ################################
         obs, reward, terminated, truncated, info = env.step(action)
 
-        #### Compute PID control ###############################
-        # action[0, :], _, _ = ctrl[0].computeControlFromState(
-        #     control_timestep=1 / control_freq_hz,
-        #     state=obs[0],
-        #     target_pos=TARGET_POS[wp_counter],
-        #     target_rpy=np.zeros(3)
-        # )
-
-        # print(f"This {action}")
-        # print(f" This too: {action[0, :]}")
+        #### Compute LQR control ###############################
         print(f"This {TARGET_POS}")
         st = obs[0]
+        # x, x rates, y, y rates, z, z rates, x dot, x dot rates, y dot, y dot rates, z dot, z dot rates
         reformatted_curr_state = np.array(
             [st[0], st[10], st[1], st[11], st[2], st[12], st[3], st[13], st[4], st[14], st[5], st[15]])
         reformatted_target_state = np.array([TARGET_POS[wp_counter][0], 0, TARGET_POS[wp_counter][1], 0, TARGET_POS[wp_counter][2], 0, 0, 0, 0, 0, 0, 0])
+
         actions = lqr_env.compute_quad_actions_from_controller(reformatted_curr_state, reformatted_target_state)
         action = np.array([lqr_env._convert_to_rpm(actions)])
+
+        # Simpen action --> append action store
+        # Compute lqr params: agent select action from reformatted_curr_state vs reformatted_target_state
+        # Update lqr params : lqr_env.update_lqr_params
 
         #### Advance waypoint ###################################
         wp_counter = wp_counter + 1 if wp_counter < (NUM_WP - 1) else wp_counter

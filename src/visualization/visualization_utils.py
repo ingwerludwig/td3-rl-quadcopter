@@ -1,5 +1,16 @@
+import copy
+from copy import deepcopy
+
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+import json
+from scipy.integrate import odeint
+
+from src.envs.quadcopter_lqr_env import QuadcopterLQREnv
+from src.models.dynamics.quadcopter import Quadcopter
+from src.training.train_utils import log_print
+
 
 def update_states(self, dt):
         """
@@ -61,9 +72,9 @@ def update_states(self, dt):
             new_psi, new_psi_dot  # psi, psi_dot
         ])
 
-def quadcopter_dynamics(state, t, u_func, quad):
+def quadcopter_dynamics(state, t, u_func, quad: Quadcopter):
     x, dx, y, dy, z, dz, phi, dphi, theta, dtheta, psi, dpsi = state
-    m, Ixx, Iyy, Izz, g = quad.m, quad.Ixx, quad.Iyy, quad.Izz, quad.g
+    m, Ixx, Iyy, Izz, g = quad.mass, quad.Ixx, quad.Iyy, quad.Izz, quad.g
 
     # Control input
     U1, U2, U3, U4 = u_func(t, state)
@@ -91,8 +102,10 @@ def quadcopter_dynamics(state, t, u_func, quad):
     return [dx, ddx, dy, ddy, dz, ddz, dphi_dt, ddphi, dtheta_dt, ddtheta, dpsi_dt, ddpsi]
 
 
-def simulate_quadcopter(initial_state, ref_state, quad, controller, t_total=40, dt=0.01):
-
+def simulate_quadcopter(lqr_quad_env:QuadcopterLQREnv, quad: Quadcopter, initial_state, ref_state, t_total=40):
+    dt=0.01
+    lqr_quad_env_copy = copy.deepcopy(lqr_quad_env)
+    controller_copy = copy.deepcopy(lqr_quad_env_copy.lqr_controller)
     t_vec = np.arange(0, t_total, dt)
 
     # Create a constant reference trajectory
@@ -100,10 +113,10 @@ def simulate_quadcopter(initial_state, ref_state, quad, controller, t_total=40, 
     ref_acc = np.zeros((6, len(t_vec)))  # Zero acceleration references
 
     def u_func(t, state):
-        quad.states = state
+        lqr_quad_env_copy.states = state
         t_idx = np.argmin(np.abs(t_vec - t))
         current_ref = ref_states[:, t_idx]
-        return controller.get_actions(current_ref)
+        return controller_copy.get_actions(initial_state, ref_states[:, t_idx])
 
     # Simulate
     sol = odeint(quadcopter_dynamics, initial_state, t_vec, args=(u_func, quad))
@@ -114,7 +127,7 @@ def simulate_quadcopter(initial_state, ref_state, quad, controller, t_total=40, 
     return t_vec, sol, u
 
 
-def plot_results(t_vec, sol, ref_state, u):
+def plot_results(t_vec, sol, ref_state, u, episode, sample, filename):
     x, y, z = sol[:, 0], sol[:, 2], sol[:, 4]
     phi, theta, psi = sol[:, 6], sol[:, 8], sol[:, 10]
 
@@ -168,4 +181,73 @@ def plot_results(t_vec, sol, ref_state, u):
     plt.grid()
 
     plt.tight_layout()
-    plt.show()
+    save_dirpath = os.path.join(os.getcwd(), "src", "results", "visualization")
+    os.makedirs(save_dirpath, exist_ok=True)
+
+    save_path = os.path.join(save_dirpath, f"Episode_{episode}_sample_{sample}_{filename}")
+    plt.savefig(save_path)  # Save the plot to the specified path
+    plt.close()  # Close the figure to free memory
+
+def plot_training_metrics(episode: int, save_dir: str):
+    """Plots metrics for ALL episodes within a SINGLE epoch."""
+    # Load all episode JSONs for this epoch
+    epoch_dir = os.path.join("src", "results", "metrics", "episode")
+    if not os.path.exists(epoch_dir):
+        log_print(f"No data for Epoch {episode}")
+        return
+
+    # Load and sort episode files
+    episodes = []
+    rewards = []
+    critic_losses = []
+    q_values = []
+    actor_losses = []
+    counter=0
+
+    for filename in sorted(os.listdir(epoch_dir)):
+        counter+=1
+        if filename.endswith('.json'):
+            with open(os.path.join(epoch_dir, filename)) as f:
+                data = json.load(f)
+                for epoch_key, metrics in data.items():
+                    episodes.append(counter)  # Extract episode number
+                    rewards.append(metrics["Avg Reward"])
+                    critic_losses.append(metrics["Avg Critic Loss"])
+                    q_values.append(metrics["Avg Q"])
+                    actor_losses.append(metrics["Avg Actor Loss"])
+
+    # Plotting (same as before, but x-axis is episodes, not epochs)
+    fig, axs = plt.subplots(2, 2, figsize=(15, 10))
+    fig.suptitle(f"Metrics for Episode {episode}", fontsize=16)
+
+    # Plot 1: Reward per episode
+    axs[0, 0].plot(episodes, rewards, 'b-o')
+    axs[0, 0].set_title("Reward per Episode")
+    axs[0, 0].set_xlabel("Episode Number")
+    axs[0, 0].grid(True)
+
+    # Plot 2: Critic Loss (log scale)
+    axs[0, 1].plot(episodes, critic_losses, 'r-s')
+    axs[0, 1].set_yscale('log')
+    axs[0, 1].set_title("Critic Loss per Episode (Log Scale)")
+    axs[0, 1].grid(True)
+
+    # Plot 3: Q Values
+    axs[1, 0].plot(episodes, q_values, 'g-D')
+    axs[1, 0].set_title("Q Value per Episode")
+    axs[1, 0].grid(True)
+
+    # Plot 4: Actor Loss
+    axs[1, 1].plot(episodes, actor_losses, 'm-^')
+    axs[1, 1].set_title("Actor Loss per Episode")
+    axs[1, 1].grid(True)
+
+    plt.tight_layout()
+
+    if save_dir:
+        full_save_path = os.path.join(epoch_dir, save_dir)
+        os.makedirs(os.path.dirname(full_save_path), exist_ok=True)
+        plt.savefig(full_save_path, dpi=300, bbox_inches='tight')
+        log_print(f"Plot saved to {full_save_path}")
+
+    plt.close()

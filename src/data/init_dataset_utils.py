@@ -1,7 +1,7 @@
 import numpy as np
 import random
 from typing import Dict
-
+from src.config.constant import DatasetType
 
 def generate_hover(duration: float = None, samples: int = None) -> Dict:
     """Generate hover-at-fixed-point trajectory with random parameters"""
@@ -9,17 +9,18 @@ def generate_hover(duration: float = None, samples: int = None) -> Dict:
     if duration is None:
         duration = random.uniform(5.0, 15.0)  # Random duration between 5-15 seconds
     if samples is None:
-        samples = random.randint(500, 1500)  # Random samples between 500-1500
+        samples = random.randint(1000, 2000)  # Random samples between 500-1500
 
     # Random height between 1.0-3.0 meters
     height = random.uniform(1.0, 3.0)
     state = [0.0, 0.0, 0.0, 0.0, height, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     return {
-        "type": "hover",
+        "type": DatasetType.HOVER_TYPE.value,
         "duration": duration,
         "samples": samples,
         "states": [state.copy() for _ in range(samples)]
     }
+
 
 def generate_line(duration: float = None, samples: int = None) -> Dict:
     """Straight line at constant velocity with random parameters"""
@@ -27,25 +28,26 @@ def generate_line(duration: float = None, samples: int = None) -> Dict:
     if duration is None:
         duration = random.uniform(5.0, 15.0)
     if samples is None:
-        samples = random.randint(500, 1500)
+        samples = random.randint(1000, 2000)
 
     t = np.linspace(0, duration, samples)
     velocity = random.uniform(0.2, 1.0)  # Random velocity between 0.2-1.0 m/s
     x = velocity * t
     x_dot = np.full_like(t, velocity)
+    z = random.uniform(1.0, 3.0)
 
     states = []
     for i in range(samples):
         states.append([
-            float(x[i]), float(x_dot[i]),
+            float(x[i]), 0.0,
             0.0, 0.0,
-            random.uniform(1.0, 3.0), 0.0,  # Random height
+            z, 0.0,  # Random height
             0.0, 0.0,
             0.0, 0.0,
             0.0, 0.0
         ])
     return {
-        "type": "line",
+        "type": DatasetType.LINE_TYPE.value,
         "duration": duration,
         "samples": samples,
         "states": states
@@ -80,7 +82,7 @@ def generate_circle(radius: float = None, duration: float = None, samples: int =
             0.0, 0.0
         ])
     return {
-        "type": "circle",
+        "type": DatasetType.CIRCLE_TYPE.value,
         "duration": duration,
         "samples": samples,
         "states": states,
@@ -113,7 +115,7 @@ def generate_s_curve(duration: float = None, samples: int = None) -> Dict:
             0.0, 0.0
         ])
     return {
-        "type": "s_curve",
+        "type": DatasetType.S_CURVE_TYPE.value,
         "duration": duration,
         "samples": samples,
         "states": states,
@@ -143,7 +145,7 @@ def generate_step(duration: float = None, samples: int = None) -> Dict:
             0.0, 0.0
         ])
     return {
-        "type": "step",
+        "type": DatasetType.STEP_TYPE.value,
         "duration": duration,
         "samples": samples,
         "states": states,
