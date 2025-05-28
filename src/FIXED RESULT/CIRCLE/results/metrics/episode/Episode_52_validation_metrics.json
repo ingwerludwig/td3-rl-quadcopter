@@ -1,0 +1,8 @@
+{
+    "Episode 52": {
+        "Avg Reward": -881.26,
+        "Avg Critic Loss": 157047.77,
+        "Avg Q": -333.11,
+        "Avg Actor Loss": 495.7
+    }
+}

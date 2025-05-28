@@ -1,0 +1,8 @@
+{
+    "Episode 89": {
+        "Avg Reward": -95.85,
+        "Avg Critic Loss": 4.12,
+        "Avg Q": -17.63,
+        "Avg Actor Loss": 17.8
+    }
+}

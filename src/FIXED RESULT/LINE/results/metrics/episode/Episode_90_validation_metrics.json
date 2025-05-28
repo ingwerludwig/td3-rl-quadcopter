@@ -1,0 +1,8 @@
+{
+    "Episode 90": {
+        "Avg Reward": -667.54,
+        "Avg Critic Loss": 28091392.0,
+        "Avg Q": -3058.31,
+        "Avg Actor Loss": 5.81
+    }
+}

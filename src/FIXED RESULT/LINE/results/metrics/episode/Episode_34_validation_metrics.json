@@ -1,0 +1,8 @@
+{
+    "Episode 34": {
+        "Avg Reward": -332.16,
+        "Avg Critic Loss": 3656538.54,
+        "Avg Q": -1056.23,
+        "Avg Actor Loss": 3.23
+    }
+}

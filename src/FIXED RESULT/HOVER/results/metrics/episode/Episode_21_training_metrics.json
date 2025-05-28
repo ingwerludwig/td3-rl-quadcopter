@@ -1,0 +1,8 @@
+{
+    "Episode 21": {
+        "Avg Reward": -451.3,
+        "Avg Critic Loss": 2.64,
+        "Avg Q": -13.12,
+        "Avg Actor Loss": 13.2
+    }
+}

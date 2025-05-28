@@ -1,0 +1,8 @@
+{
+    "Episode 58": {
+        "Avg Reward": -463.27,
+        "Avg Critic Loss": 3.83,
+        "Avg Q": -18.24,
+        "Avg Actor Loss": 18.23
+    }
+}

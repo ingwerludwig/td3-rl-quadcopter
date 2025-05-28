@@ -61,7 +61,7 @@ def generate_circle(radius: float = None, duration: float = None, samples: int =
     if duration is None:
         duration = random.uniform(5.0, 20.0)
     if samples is None:
-        samples = random.randint(500, 1500)
+        samples = random.randint(1000, 2000)
 
     t = np.linspace(0, duration, samples)
     omega = 2 * np.pi / duration
@@ -70,13 +70,14 @@ def generate_circle(radius: float = None, duration: float = None, samples: int =
     y = radius * (1 - np.cos(omega * t))  # Centered at (0, radius)
     x_dot = radius * omega * np.cos(omega * t)
     y_dot = radius * omega * np.sin(omega * t)
+    z = random.uniform(1.0, 3.0)
 
     states = []
     for i in range(samples):
         states.append([
-            float(x[i]), float(x_dot[i]),
-            float(y[i]), float(y_dot[i]),
-            random.uniform(1.0, 3.0), 0.0,  # Random height
+            float(x[i]), 0,
+            float(y[i]), 0,
+            z, 0.0,  # Random height
             0.0, 0.0,
             0.0, 0.0,
             0.0, 0.0
@@ -103,13 +104,14 @@ def generate_s_curve(duration: float = None, samples: int = None) -> Dict:
     max_distance = random.uniform(2.0, 5.0)  # Random max distance
     x = max_distance * (6*tau**5 - 15*tau**4 + 10*tau**3)
     x_dot = max_distance * (30*tau**4 - 60*tau**3 + 30*tau**2) / duration
+    z = random.uniform(1.0, 3.0)
 
     states = []
     for i in range(samples):
         states.append([
-            float(x[i]), float(x_dot[i]),
-            0.0, 0.0,
-            random.uniform(1.0, 3.0), 0.0,  # Random height
+            float(x[i]), 0,
+            float(x[i]), 0.0,
+            float(x[i]), 0.0,  # Random height
             0.0, 0.0,
             0.0, 0.0,
             0.0, 0.0

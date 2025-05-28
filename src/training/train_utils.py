@@ -15,6 +15,7 @@ def load_dataset(filename):
 
 def create_directory_checkpoint():
     directory = os.path.join(os.getcwd(), "src", "checkpoint")
+    os.makedirs(directory, exist_ok=True)
     try:
         if not os.path.exists(directory):
             os.makedirs(directory)
@@ -85,6 +86,7 @@ def create_metrics_episode(ep_i, avg_reward, avg_critic_loss, avg_q_value, avg_a
 
 def log_print(*args, **kwargs):
     logs_dir = os.path.join(os.getcwd(), "src", "logs")
+    os.makedirs(logs_dir, exist_ok=True)
     log_filepath = os.path.join(logs_dir, "result.log")
     os.makedirs(logs_dir, exist_ok=True)
     with open(log_filepath, 'a') as f:

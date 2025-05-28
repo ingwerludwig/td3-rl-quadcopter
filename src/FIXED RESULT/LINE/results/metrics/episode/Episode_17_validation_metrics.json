@@ -1,0 +1,8 @@
+{
+    "Episode 17": {
+        "Avg Reward": -672.33,
+        "Avg Critic Loss": 6660821.52,
+        "Avg Q": -13777.52,
+        "Avg Actor Loss": 12038.31
+    }
+}

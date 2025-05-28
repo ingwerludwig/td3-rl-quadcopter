@@ -1,8 +1,0 @@
-{
-    "Episode 6": {
-        "Avg Reward": -81.02,
-        "Avg Critic Loss": 0.37,
-        "Avg Q": -1.33,
-        "Avg Actor Loss": 1.34
-    }
-}

@@ -1,0 +1,8 @@
+{
+    "Episode 67": {
+        "Avg Reward": -274.91,
+        "Avg Critic Loss": 0.05,
+        "Avg Q": -0.48,
+        "Avg Actor Loss": 0.48
+    }
+}

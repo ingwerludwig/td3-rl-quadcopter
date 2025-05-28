@@ -1,0 +1,8 @@
+{
+    "Episode 23": {
+        "Avg Reward": -943.56,
+        "Avg Critic Loss": 352110.53,
+        "Avg Q": -992.62,
+        "Avg Actor Loss": 1247.37
+    }
+}

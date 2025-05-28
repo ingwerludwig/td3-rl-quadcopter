@@ -1,0 +1,8 @@
+{
+    "Episode 40": {
+        "Avg Reward": -77.4,
+        "Avg Critic Loss": 3.14,
+        "Avg Q": -16.8,
+        "Avg Actor Loss": 16.82
+    }
+}

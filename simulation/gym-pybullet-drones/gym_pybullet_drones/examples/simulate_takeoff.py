@@ -2,6 +2,10 @@ import time
 import argparse
 import numpy as np
 import torch
+import os
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..')))
 
 from gym_pybullet_drones.utils.enums import DroneModel, Physics
 from gym_pybullet_drones.envs.CtrlAviary import CtrlAviary
@@ -10,6 +14,7 @@ from gym_pybullet_drones.utils.Logger import Logger
 from gym_pybullet_drones.utils.utils import sync, str2bool
 from gym_pybullet_drones.control.LQRControl import *
 from src.agents.td3 import TD3
+from pprint import pprint
 
 # ---------- DEFAULTS ----------
 DEFAULT_DRONE = DroneModel('cf2x')
@@ -49,28 +54,24 @@ def run(
     )
 
     #### Initiate: Quadcopter Config and ENV #####################
-    quad_config = QuadcopterConfig()
-    lqr_env = QuadcopterLQREnv(quad_config=quad_config)
+    quad_config = Quadcopter()
+    lqr_env = QuadcopterLQREnv(quadcopter=quad_config)
 
     #### Load: checkpoint model#####################
-    state_dim = env.observation_space.shape[0]
-    action_dim = env.action_space.shape[0]
+    state_dim = lqr_env.observation_space.shape[0]
+    action_dim = lqr_env.action_space.shape[0]
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     agent = TD3(state_dim, action_dim, device)
-
-    #### Initiate: Reference state for simulation #####################
-
-    ###
-    #### Set Ref state in env #####################
-    # lqr_env.set_ref_states()
-    ###
+    agent.load_checkpoint("/home/citiai-cygnus/VisionRAG-Ingwer/TugasIngwer/TugasAIForRobotics/src/FIXED RESULT/HOVER/checkpoint/td3_quadcopter_epoch_100.pth")
 
     #### Trajectory: smooth vertical climb #####################
     NUM_WP = control_freq_hz * duration_sec
     TARGET_POS = np.zeros((NUM_WP, 3))
     for i in range(NUM_WP):
-        TARGET_POS[i] = [0, 0, 1 * i / NUM_WP]  # Linear climb from 0 to 2 meters
+        TARGET_POS[i] = [0, 0, 3]  # Linear climb from 0 to 2 meters
+
     wp_counter = 0
+
 
     #### Controller + Logger ###################################
     ctrl = [DSLPIDControl(drone_model=drone)]
@@ -91,17 +92,26 @@ def run(
     for i in range(0, int(duration_sec * control_freq_hz)):
 
         #### Step the simulation ################################
+
+        # obs, reward, terminated, truncated, info = lqr_env.step()
         obs, reward, terminated, truncated, info = env.step(action)
 
         #### Compute LQR control ###############################
-        print(f"This {TARGET_POS}")
+        # print(f"This {TARGET_POS}")
         st = obs[0]
         # x, x rates, y, y rates, z, z rates, x dot, x dot rates, y dot, y dot rates, z dot, z dot rates
         reformatted_curr_state = np.array(
             [st[0], st[10], st[1], st[11], st[2], st[12], st[3], st[13], st[4], st[14], st[5], st[15]])
         reformatted_target_state = np.array([TARGET_POS[wp_counter][0], 0, TARGET_POS[wp_counter][1], 0, TARGET_POS[wp_counter][2], 0, 0, 0, 0, 0, 0, 0])
 
-        actions = lqr_env.compute_quad_actions_from_controller(reformatted_curr_state, reformatted_target_state)
+        lqr_env.states = reformatted_curr_state
+        lqr_env.set_ref_states(reformatted_target_state)
+
+
+        lqr_params = agent.select_action(reformatted_curr_state - reformatted_target_state)
+        lqr_env.update_lqr_params(lqr_params)
+
+        actions = lqr_env.compute_quad_actions_from_controller()
         action = np.array([lqr_env._convert_to_rpm(actions)])
 
         # Simpen action --> append action store

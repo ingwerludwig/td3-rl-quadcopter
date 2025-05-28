@@ -1,0 +1,8 @@
+{
+    "Episode 82": {
+        "Avg Reward": -476.46,
+        "Avg Critic Loss": 170929.36,
+        "Avg Q": -177.19,
+        "Avg Actor Loss": 354.3
+    }
+}

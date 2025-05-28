@@ -1,0 +1,8 @@
+{
+    "Episode 39": {
+        "Avg Reward": -382.49,
+        "Avg Critic Loss": 0.13,
+        "Avg Q": -3.77,
+        "Avg Actor Loss": 3.77
+    }
+}

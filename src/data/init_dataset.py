@@ -18,12 +18,13 @@ def generate_lqr_dataset() -> List[Dict]:
 def generate_dataset():
     dataset = []
     for i in range(NUM_EPISODE):
-        dataset.append(generate_line())
+        dataset.append(generate_s_curve())
     return dataset
 
 
 def save_to_json(dataset: List[Dict], filename):
     """Save dataset to JSON file."""
+    os.makedirs(os.path.join(os.getcwd(), "src/data"), exist_ok=True)
     dataset_file_path = os.path.join(os.getcwd(), "src/data", filename)
     with open(dataset_file_path, 'w') as f:
         json.dump(dataset, f, indent=4, ensure_ascii=False)

@@ -1,0 +1,8 @@
+{
+    "Episode 19": {
+        "Avg Reward": -106.14,
+        "Avg Critic Loss": 2.28,
+        "Avg Q": -11.89,
+        "Avg Actor Loss": 11.79
+    }
+}

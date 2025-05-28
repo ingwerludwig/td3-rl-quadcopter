@@ -1,0 +1,8 @@
+{
+    "Episode 54": {
+        "Avg Reward": -1636.19,
+        "Avg Critic Loss": 730676.33,
+        "Avg Q": -370.47,
+        "Avg Actor Loss": 740.85
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "Episode 80": {
+        "Avg Reward": -795.62,
+        "Avg Critic Loss": 430754.94,
+        "Avg Q": -803.03,
+        "Avg Actor Loss": 1088.79
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "Episode 22": {
+        "Avg Reward": -919.19,
+        "Avg Critic Loss": 384665.41,
+        "Avg Q": -268.87,
+        "Avg Actor Loss": 537.65
+    }
+}

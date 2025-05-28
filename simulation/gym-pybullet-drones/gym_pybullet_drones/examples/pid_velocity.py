@@ -87,6 +87,7 @@ def run(
                          user_debug_gui=user_debug_gui
                          )
 
+
     #### Obtain the PyBullet Client ID from the environment ####
     PYB_CLIENT = env.getPyBulletClient()
     DRONE_IDS = env.getDroneIds()

@@ -1,0 +1,8 @@
+{
+    "Episode 84": {
+        "Avg Reward": -521.73,
+        "Avg Critic Loss": 214586.31,
+        "Avg Q": -534.84,
+        "Avg Actor Loss": 738.94
+    }
+}

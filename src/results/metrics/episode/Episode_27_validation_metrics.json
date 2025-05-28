@@ -1,0 +1,8 @@
+{
+    "Episode 27": {
+        "Avg Reward": -644.4,
+        "Avg Critic Loss": 239792.05,
+        "Avg Q": -211.82,
+        "Avg Actor Loss": 423.56
+    }
+}

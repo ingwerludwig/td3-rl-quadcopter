@@ -1,0 +1,8 @@
+{
+    "Episode 100": {
+        "Avg Reward": -986.48,
+        "Avg Critic Loss": 393223.04,
+        "Avg Q": -738.2,
+        "Avg Actor Loss": 1011.31
+    }
+}

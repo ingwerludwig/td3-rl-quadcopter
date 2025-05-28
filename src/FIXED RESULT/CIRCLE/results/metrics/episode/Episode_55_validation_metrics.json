@@ -1,0 +1,8 @@
+{
+    "Episode 55": {
+        "Avg Reward": -1420.46,
+        "Avg Critic Loss": 522062.08,
+        "Avg Q": -785.49,
+        "Avg Actor Loss": 1097.53
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "Episode 26": {
+        "Avg Reward": -658.37,
+        "Avg Critic Loss": 39628241.64,
+        "Avg Q": -5414.32,
+        "Avg Actor Loss": 1589.04
+    }
+}

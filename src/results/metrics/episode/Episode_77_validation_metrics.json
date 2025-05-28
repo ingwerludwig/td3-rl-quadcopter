@@ -1,0 +1,8 @@
+{
+    "Episode 77": {
+        "Avg Reward": -983.53,
+        "Avg Critic Loss": 459654.85,
+        "Avg Q": -294.46,
+        "Avg Actor Loss": 588.83
+    }
+}

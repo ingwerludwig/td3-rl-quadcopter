@@ -1,0 +1,8 @@
+{
+    "Episode 16": {
+        "Avg Reward": -573.06,
+        "Avg Critic Loss": 1491819.94,
+        "Avg Q": -4223.05,
+        "Avg Actor Loss": 3422.62
+    }
+}

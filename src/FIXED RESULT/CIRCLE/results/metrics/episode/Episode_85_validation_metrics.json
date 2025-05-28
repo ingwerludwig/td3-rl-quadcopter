@@ -1,0 +1,8 @@
+{
+    "Episode 85": {
+        "Avg Reward": -493.64,
+        "Avg Critic Loss": 129067.31,
+        "Avg Q": -324.51,
+        "Avg Actor Loss": 477.14
+    }
+}

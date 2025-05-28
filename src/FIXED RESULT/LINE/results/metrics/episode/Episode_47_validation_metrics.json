@@ -1,0 +1,8 @@
+{
+    "Episode 47": {
+        "Avg Reward": -359.41,
+        "Avg Critic Loss": 24432970.48,
+        "Avg Q": -2882.86,
+        "Avg Actor Loss": 28.77
+    }
+}

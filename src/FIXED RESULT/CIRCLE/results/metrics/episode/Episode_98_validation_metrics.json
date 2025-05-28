@@ -1,0 +1,8 @@
+{
+    "Episode 98": {
+        "Avg Reward": -1058.59,
+        "Avg Critic Loss": 201435.89,
+        "Avg Q": -348.44,
+        "Avg Actor Loss": 537.9
+    }
+}

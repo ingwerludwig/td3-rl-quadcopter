@@ -1,0 +1,8 @@
+{
+    "Episode 72": {
+        "Avg Reward": -522.18,
+        "Avg Critic Loss": 0.04,
+        "Avg Q": -0.62,
+        "Avg Actor Loss": 0.62
+    }
+}

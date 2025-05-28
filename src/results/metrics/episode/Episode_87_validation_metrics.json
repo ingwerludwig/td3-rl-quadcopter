@@ -1,0 +1,8 @@
+{
+    "Episode 87": {
+        "Avg Reward": -603.62,
+        "Avg Critic Loss": 222016.82,
+        "Avg Q": -202.97,
+        "Avg Actor Loss": 405.85
+    }
+}

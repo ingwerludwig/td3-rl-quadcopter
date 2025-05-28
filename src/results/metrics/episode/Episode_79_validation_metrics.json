@@ -1,0 +1,8 @@
+{
+    "Episode 79": {
+        "Avg Reward": -519.04,
+        "Avg Critic Loss": 94764.52,
+        "Avg Q": -128.13,
+        "Avg Actor Loss": 256.16
+    }
+}

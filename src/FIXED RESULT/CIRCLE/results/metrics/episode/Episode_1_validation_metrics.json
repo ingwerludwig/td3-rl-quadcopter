@@ -1,0 +1,8 @@
+{
+    "Episode 1": {
+        "Avg Reward": -453.49,
+        "Avg Critic Loss": 1926779.18,
+        "Avg Q": -1039.41,
+        "Avg Actor Loss": 1654.55
+    }
+}

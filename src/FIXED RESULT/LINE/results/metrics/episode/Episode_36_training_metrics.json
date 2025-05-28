@@ -1,0 +1,8 @@
+{
+    "Episode 36": {
+        "Avg Reward": -142.61,
+        "Avg Critic Loss": 0.11,
+        "Avg Q": -4.75,
+        "Avg Actor Loss": 4.76
+    }
+}

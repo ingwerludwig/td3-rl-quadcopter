@@ -1,0 +1,8 @@
+{
+    "Episode 73": {
+        "Avg Reward": -70.94,
+        "Avg Critic Loss": 0.44,
+        "Avg Q": -7.09,
+        "Avg Actor Loss": 7.09
+    }
+}
