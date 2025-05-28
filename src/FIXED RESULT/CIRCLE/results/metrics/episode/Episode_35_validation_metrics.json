@@ -1,0 +1,8 @@
+{
+    "Episode 35": {
+        "Avg Reward": -971.74,
+        "Avg Critic Loss": 374707.87,
+        "Avg Q": -553.59,
+        "Avg Actor Loss": 816.92
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "Episode 81": {
+        "Avg Reward": -206.84,
+        "Avg Critic Loss": 10965260.31,
+        "Avg Q": -1923.23,
+        "Avg Actor Loss": 13.84
+    }
+}

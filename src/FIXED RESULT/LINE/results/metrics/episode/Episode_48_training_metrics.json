@@ -1,0 +1,8 @@
+{
+    "Episode 48": {
+        "Avg Reward": -282.31,
+        "Avg Critic Loss": 0.09,
+        "Avg Q": -3.21,
+        "Avg Actor Loss": 3.19
+    }
+}

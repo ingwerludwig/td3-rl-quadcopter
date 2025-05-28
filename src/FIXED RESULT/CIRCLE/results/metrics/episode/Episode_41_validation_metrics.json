@@ -1,0 +1,8 @@
+{
+    "Episode 41": {
+        "Avg Reward": -774.47,
+        "Avg Critic Loss": 263093.42,
+        "Avg Q": -716.27,
+        "Avg Actor Loss": 939.67
+    }
+}

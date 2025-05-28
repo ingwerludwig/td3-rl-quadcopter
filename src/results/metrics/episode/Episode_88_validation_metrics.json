@@ -1,0 +1,8 @@
+{
+    "Episode 88": {
+        "Avg Reward": -326.46,
+        "Avg Critic Loss": 55799.65,
+        "Avg Q": -97.55,
+        "Avg Actor Loss": 195.0
+    }
+}

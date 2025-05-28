@@ -1,0 +1,8 @@
+{
+    "Episode 42": {
+        "Avg Reward": -468.92,
+        "Avg Critic Loss": 0.11,
+        "Avg Q": -3.39,
+        "Avg Actor Loss": 3.39
+    }
+}

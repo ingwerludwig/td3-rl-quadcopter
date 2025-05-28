@@ -11,7 +11,7 @@ Golf Team project, created for AI For Robotics course, implements a Reinforcemen
 ## Prerequisites
 
 Ensure you have the following installed:
-- Python 3.8 or higher
+- Python 3.10 or higher
 - `pip` (Python package manager)
 
 ## Setup Instructions
@@ -31,12 +31,36 @@ Follow these steps to set up and run the training:
    ```
    This command installs all necessary packages, ensuring the environment is ready for training.
 
-3. **Run the Training**:
-   Start the RL training with LQR by executing the main script:
+
+3. **Install Simulation Gym Pybullet Dependencies**:
+   Start the RL training with LQR by executing script:
+   ```bash
+   cd simulation/gym-pybullet-drones
+   ```
+   ```bash
+   pip3 install -e . # if needed, `sudo apt install build-essential` to install `gcc` and build `pybullet`
+   ```
+   This command initiates the training process, which will handle all necessary simulation process.
+   Please refer to this repository when installing the simulation.
+   ```bash
+   https://github.com/utiasDSL/gym-pybullet-drones?tab=readme-ov-file
+   ```
+
+4. **Run the Training**:
+   Start the RL training with LQR by executing script:
    ```bash
    bash ./scripts/run_training.sh
    ```
-   This command initiates the training process, which will handle all necessary computations, including environment setup, agent training, and LQR optimization.
+   This command initiates the training process, which will handle all necessary computations, agent training, and LQR optimization.
+
+
+5. **Run the Simulation**:
+   Start the Quadcopter Simulation of Gym Pybullet by executing script:
+   ```bash
+   bash ./scripts/run_simulation.sh
+   ```
+   This command initiates all necessary computations environment setup.
+
 
 ## Notes
 - Ensure you are in the project directory when running the commands.

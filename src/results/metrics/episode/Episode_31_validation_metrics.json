@@ -1,0 +1,8 @@
+{
+    "Episode 31": {
+        "Avg Reward": -644.86,
+        "Avg Critic Loss": 71886.76,
+        "Avg Q": -112.65,
+        "Avg Actor Loss": 225.21
+    }
+}

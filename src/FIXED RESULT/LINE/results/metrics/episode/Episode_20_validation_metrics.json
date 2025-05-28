@@ -1,0 +1,8 @@
+{
+    "Episode 20": {
+        "Avg Reward": -185.64,
+        "Avg Critic Loss": 70043.08,
+        "Avg Q": -3830.96,
+        "Avg Actor Loss": 3944.87
+    }
+}

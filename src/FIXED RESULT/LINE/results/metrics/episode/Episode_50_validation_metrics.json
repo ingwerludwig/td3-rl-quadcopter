@@ -1,0 +1,8 @@
+{
+    "Episode 50": {
+        "Avg Reward": -722.38,
+        "Avg Critic Loss": 53943206.52,
+        "Avg Q": -4284.17,
+        "Avg Actor Loss": 118.19
+    }
+}

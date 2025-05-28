@@ -1,0 +1,8 @@
+{
+    "Episode 49": {
+        "Avg Reward": -409.56,
+        "Avg Critic Loss": 52632.28,
+        "Avg Q": -95.26,
+        "Avg Actor Loss": 190.42
+    }
+}

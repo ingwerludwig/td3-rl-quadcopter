@@ -1,0 +1,8 @@
+{
+    "Episode 7": {
+        "Avg Reward": -286.62,
+        "Avg Critic Loss": 631.32,
+        "Avg Q": -377.15,
+        "Avg Actor Loss": 389.25
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "Episode 92": {
+        "Avg Reward": -496.88,
+        "Avg Critic Loss": 105509.14,
+        "Avg Q": -272.13,
+        "Avg Actor Loss": 404.9
+    }
+}

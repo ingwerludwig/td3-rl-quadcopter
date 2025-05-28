@@ -1,0 +1,8 @@
+{
+    "Episode 25": {
+        "Avg Reward": -218.97,
+        "Avg Critic Loss": 559626.41,
+        "Avg Q": -631.45,
+        "Avg Actor Loss": 196.59
+    }
+}

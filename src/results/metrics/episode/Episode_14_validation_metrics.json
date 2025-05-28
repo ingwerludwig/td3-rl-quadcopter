@@ -1,0 +1,8 @@
+{
+    "Episode 14": {
+        "Avg Reward": -1231.99,
+        "Avg Critic Loss": 1828644.58,
+        "Avg Q": -591.17,
+        "Avg Actor Loss": 1182.25
+    }
+}

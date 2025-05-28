@@ -1,0 +1,8 @@
+{
+    "Episode 38": {
+        "Avg Reward": -100.19,
+        "Avg Critic Loss": 0.13,
+        "Avg Q": -4.07,
+        "Avg Actor Loss": 4.07
+    }
+}

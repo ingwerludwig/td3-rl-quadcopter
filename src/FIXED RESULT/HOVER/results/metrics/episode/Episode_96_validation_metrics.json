@@ -1,0 +1,8 @@
+{
+    "Episode 96": {
+        "Avg Reward": -207.75,
+        "Avg Critic Loss": 9.11,
+        "Avg Q": 0.41,
+        "Avg Actor Loss": -0.1
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "Episode 37": {
+        "Avg Reward": -522.76,
+        "Avg Critic Loss": 238771.92,
+        "Avg Q": -533.51,
+        "Avg Actor Loss": 744.67
+    }
+}

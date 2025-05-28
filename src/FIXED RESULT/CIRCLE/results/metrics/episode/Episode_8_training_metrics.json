@@ -1,0 +1,8 @@
+{
+    "Episode 8": {
+        "Avg Reward": -183.13,
+        "Avg Critic Loss": 0.03,
+        "Avg Q": -1.4,
+        "Avg Actor Loss": 1.4
+    }
+}

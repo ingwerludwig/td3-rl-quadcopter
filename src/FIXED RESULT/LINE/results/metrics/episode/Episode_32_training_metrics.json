@@ -1,0 +1,8 @@
+{
+    "Episode 32": {
+        "Avg Reward": -243.85,
+        "Avg Critic Loss": 0.12,
+        "Avg Q": -5.05,
+        "Avg Actor Loss": 5.05
+    }
+}

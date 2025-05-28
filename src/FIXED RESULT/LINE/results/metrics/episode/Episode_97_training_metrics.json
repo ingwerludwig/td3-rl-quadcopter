@@ -1,0 +1,8 @@
+{
+    "Episode 97": {
+        "Avg Reward": -82.84,
+        "Avg Critic Loss": 0.06,
+        "Avg Q": -2.16,
+        "Avg Actor Loss": 2.16
+    }
+}

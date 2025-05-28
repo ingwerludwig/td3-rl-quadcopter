@@ -1,0 +1,8 @@
+{
+    "Episode 93": {
+        "Avg Reward": -670.29,
+        "Avg Critic Loss": 104857.58,
+        "Avg Q": -138.04,
+        "Avg Actor Loss": 275.99
+    }
+}

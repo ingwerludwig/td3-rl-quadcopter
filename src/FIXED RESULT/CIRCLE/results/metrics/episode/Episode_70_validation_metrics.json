@@ -1,0 +1,8 @@
+{
+    "Episode 70": {
+        "Avg Reward": -706.68,
+        "Avg Critic Loss": 181549.15,
+        "Avg Q": -402.45,
+        "Avg Actor Loss": 587.33
+    }
+}

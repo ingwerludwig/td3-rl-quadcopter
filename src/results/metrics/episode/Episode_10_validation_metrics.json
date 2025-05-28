@@ -1,0 +1,8 @@
+{
+    "Episode 10": {
+        "Avg Reward": -1239.87,
+        "Avg Critic Loss": 508438.53,
+        "Avg Q": -313.56,
+        "Avg Actor Loss": 627.03
+    }
+}

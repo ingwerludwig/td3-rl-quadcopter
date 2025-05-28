@@ -1,0 +1,8 @@
+{
+    "Episode 29": {
+        "Avg Reward": -868.87,
+        "Avg Critic Loss": 405886.96,
+        "Avg Q": -783.63,
+        "Avg Actor Loss": 1064.42
+    }
+}

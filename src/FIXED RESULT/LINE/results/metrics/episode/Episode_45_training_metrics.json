@@ -1,0 +1,8 @@
+{
+    "Episode 45": {
+        "Avg Reward": -251.48,
+        "Avg Critic Loss": 0.1,
+        "Avg Q": -3.1,
+        "Avg Actor Loss": 3.1
+    }
+}
